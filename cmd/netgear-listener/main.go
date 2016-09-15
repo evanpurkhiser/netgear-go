@@ -14,6 +14,11 @@ var (
 	password = flag.String("password", "", "Your netgear router password")
 )
 
+var output = map[netgear.DeviceChange]string{
+	netgear.DeviceAdded:   "Device Added",
+	netgear.DeviceRemoved: "Device Removed",
+}
+
 func main() {
 	flag.Parse()
 
@@ -25,12 +30,7 @@ func main() {
 		}
 
 		mac := change.Device.MAC.String()
-
-		if change.Change == netgear.DeviceAdded {
-			fmt.Printf("New device added: %s\n", mac)
-		} else {
-			fmt.Printf("Device removed: %s\n", mac)
-		}
+		fmt.Printf(output[change.Change]+": %s\n", mac)
 	}
 
 	pollTime := time.Second * 10
