@@ -21,6 +21,7 @@ var output = map[netgear.DeviceChange]string{
 
 func listener(change *netgear.ChangedDevice, err error) {
 	if err != nil {
+		fmt.Printf("Failed to query for devices: %s\n", err)
 		return
 	}
 
