@@ -34,7 +34,7 @@ func (c *Client) OnDeviceChanged(poll time.Duration, fn DeviceListener) *time.Ti
 	}
 
 	watcher := func() {
-		for {
+		for _ = range ticker.C {
 			updatedDevices, err := getDevices()
 			if err != nil {
 				fn(nil, err)
@@ -47,8 +47,6 @@ func (c *Client) OnDeviceChanged(poll time.Duration, fn DeviceListener) *time.Ti
 			}
 
 			devices = updatedDevices
-
-			<-ticker.C
 		}
 	}
 
