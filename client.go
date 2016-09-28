@@ -184,9 +184,13 @@ func parseDevicesString(devices string) ([]AttachedDevice, error) {
 	devStrs := strings.Split(devices[2:], "@")
 	devList := make([]AttachedDevice, len(devStrs))
 
-	// Each device contains seven properties separaterd by a ';' character
+	// Each device contains eight properties separaterd by a ';' character
 	for i, devStr := range devStrs {
 		parts := strings.Split(devStr, ";")
+
+		if len(parts) != 8 {
+			return nil, fmt.Errorf("Device string does not contain enough parts: %q", devStr)
+		}
 
 		mac, err := net.ParseMAC(parts[3])
 		if err != nil {
