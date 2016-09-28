@@ -181,12 +181,12 @@ func parseDevicesString(devices string) ([]AttachedDevice, error) {
 	// Each device in the list is separated by a '@' character.
 	// We trim the first two characters as it is just the total number of
 	// devices followed by a '@'.
-	strDevs := strings.Split(devices[2:], "@")
-	devList := make([]AttachedDevice, len(strDevs))
+	devStrs := strings.Split(devices[2:], "@")
+	devList := make([]AttachedDevice, len(devStrs))
 
 	// Each device contains seven properties separaterd by a ';' character
-	for i, strDev := range strDevs {
-		parts := strings.Split(strDev, ";")
+	for i, devStr := range devStrs {
+		parts := strings.Split(devStr, ";")
 
 		mac, err := net.ParseMAC(parts[3])
 		if err != nil {
