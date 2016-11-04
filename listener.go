@@ -3,12 +3,12 @@ package netgear
 import "time"
 
 // DeviceChange repressents the change in the devices status
-type DeviceChange int
+type DeviceChange string
 
 // Device change statuses
 const (
-	DeviceAdded   DeviceChange = iota
-	DeviceRemoved DeviceChange = iota
+	DeviceAdded   DeviceChange = "added"
+	DeviceRemoved DeviceChange = "removed"
 )
 
 // ChangedDevice represents the device that has changed
